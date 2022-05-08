@@ -41,9 +41,9 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-userSchema.methods.toJSON = function () {
-  const { password, __v, ...user } = this.toObject();
-  return user;
-};
+// userSchema.methods.toJSON = function () {
+//   const { password, __v, ...user } = this.toObject();
+//   return user;
+// };
 
 module.exports = model("User", userSchema);

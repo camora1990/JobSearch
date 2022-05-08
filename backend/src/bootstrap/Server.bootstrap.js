@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { config } = require("../config/config");
 const { userRoute } = require("../routes/user.route");
+const { authRouter } = require("../routes/auth.route");
 
 class Server {
   #PORT;
@@ -27,6 +28,7 @@ class Server {
 
   #routes() {
     this.#APP.use(this.#PATH.user, userRoute)
+    this.#APP.use(this.#PATH.auth, authRouter)
   }
 
   initServer() {

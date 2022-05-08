@@ -9,8 +9,8 @@ class UserService {
     const user = new userModel({ email, password, name, city, role });
 
     try {
-      const {email,name,city,role,_id}=await user.save();
-      const token = await generateJWT({email,name,city,role,_id});
+      await user.save();
+      const token = await generateJWT(user);
       const response = responseMessage(true, 200, "user created", {
         user: user,
         token,
@@ -18,7 +18,7 @@ class UserService {
       return res.status(200).json(response);
     } catch (error) {
       const response = responseMessage(false, 500, error.message);
-      return res.status(200).json(response);
+      return res.status(500).json(response);
     }
   }
 }
