@@ -5,7 +5,7 @@ const validCategory = ["FrontEnd", "BackEnd", "JavaScript" , "Python"];
 
 const offerSchema = new Schema(
   {   
-    empresa: {     // lo dejo acá ya para rapido acceso o se obtiene porla relación?
+    empresaID: {     // lo dejo acá ya para rapido acceso o se obtiene porla relación?
       type: String,
       required: true,
     },
