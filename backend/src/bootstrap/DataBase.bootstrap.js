@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const { config } = require("../config/config");
+const categories = require("../data/defaultCategories");
 const countries = require("../data/defaultCountries");
-const { countryModel } = require("../models");
+const { countryModel, categoryModel } = require("../models");
 
 class DataBase {
   #CONNECTION_STRING;
@@ -39,6 +40,7 @@ class DataBase {
     try {
       this.#deleteData()
       await countryModel.insertMany(countries);
+      await categoryModel.insertMany(categories);
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +48,7 @@ class DataBase {
 
   async #deleteData() {
     try {
+      await countryModel.deleteMany()
       await countryModel.deleteMany()
     } catch (error) {
       console.log(error);
