@@ -49,7 +49,7 @@ class DataBase {
   async #deleteData() {
     try {
       await countryModel.deleteMany()
-      await countryModel.deleteMany()
+      await categoryModel.deleteMany()
     } catch (error) {
       console.log(error);
     }
