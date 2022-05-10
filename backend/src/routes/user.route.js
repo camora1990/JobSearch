@@ -1,4 +1,4 @@
-const { Router, request, response } = require("express");
+const { Router } = require("express");
 const UserService = require("../services/user.service");
 const { check } = require("express-validator");
 const { validateField } = require("../middlewares/validateField");

@@ -1,49 +1,25 @@
 const { Schema, model } = require("mongoose");
 
-const validCategory = ["FrontEnd", "BackEnd", "JavaScript" , "Python"];
-// const validMode = ["Presencial", "Remoto", "Hibrido" ];
-
 const offerSchema = new Schema(
-  {   
-    empresaID: {     // lo dejo acá ya para rapido acceso o se obtiene porla relación?
+  {
+    offer: {
       type: String,
       required: true,
     },
-    tittle: {
-      type: String,
-      required: true,
+    employer: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
-    detail: {
+    country: {
       type: String,
-      required: true,
-    },
-    // mode: {
-    //   type: String,
-    //   required: true,
-    //   enum: validMode,
-    //   default: "Hibrido",
-    //   message: "Invalid Mode [Presencial, Remoto, Hibrido]",     
-    // },
-    // country: {
-    //   type: String,
-    //   required: true,
-    // },
-    city: {
-      type: String,
-      required: true,
+      require: true,
     },
     category: {
-      type: String,
-      required: true,
-      enum: validCategory,
-      default: "JavaScript",
-      message: "Invalid Category [FrontEnd, BackEnd, JavaScript, Python]",
+      type: Schema.Types.ObjectId,
+      ref: "Categoty",
     },
   },
   { timestamps: true }
 );
 
-
 module.exports = model("offer", offerSchema);
-
-

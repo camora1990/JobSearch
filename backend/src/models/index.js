@@ -1,9 +1,11 @@
-const userModel = require("./user.model")
-const offerModel = require("./offer.model")
-const postulationModel = require("./postulation.model")
+const userModel = require("./user.model");
+const offerModel = require("./offer.model");
+const categoryModel = require("./category.model");
+const countryModel = require("./country.model");
 
 module.exports = {
   userModel,
   offerModel,
-  postulationModel,
+  categoryModel,
+  countryModel,
 };

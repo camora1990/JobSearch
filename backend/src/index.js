@@ -8,6 +8,7 @@ const dataBase = new DataBase();
   try {
     await server.initServer();
     const infoDatabase = await dataBase.initialize();
+    await dataBase.initializeData()
     console.log(`connected to dataBase ${infoDatabase.connections[0].name}`);
   } catch (error) {
     await dataBase.closeConnection()

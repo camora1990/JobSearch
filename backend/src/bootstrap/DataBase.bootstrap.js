@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const { config } = require("../config/config");
+const countries = require("../data/defaultCountries");
+const { countryModel } = require("../models");
 
 class DataBase {
   #CONNECTION_STRING;
@@ -25,9 +27,26 @@ class DataBase {
     });
   }
 
-  async closeConnection(){
+  async closeConnection() {
     try {
-      await this.#DB_CLIENT.close(true)
+      await this.#DB_CLIENT.close(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async initializeData() {
+    try {
+      this.#deleteData()
+      await countryModel.insertMany(countries);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async #deleteData() {
+    try {
+      await countryModel.deleteMany()
     } catch (error) {
       console.log(error);
     }
