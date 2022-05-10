@@ -3,6 +3,7 @@ const cors = require("cors");
 const { config } = require("../config/config");
 const { userRoute } = require("../routes/user.route");
 const { authRouter } = require("../routes/auth.route");
+const { offRoute } = require("../routes/offer.route");
 
 class Server {
   #PORT;
@@ -13,11 +14,12 @@ class Server {
     this.#PORT = config.port || 3000;
     this.#APP = express();
     this.#PATH = {
-      user:"/api/v1/user",
-      auth: "/api/v1/login"
-    }
+      user: "/api/v1/user",
+      auth: "/api/v1/login",
+      offer: "/api/v1/offer",
+    };
     this.#middleware();
-    this.#routes()
+    this.#routes();
   }
 
   #middleware() {
@@ -27,8 +29,9 @@ class Server {
   }
 
   #routes() {
-    this.#APP.use(this.#PATH.user, userRoute)
-    this.#APP.use(this.#PATH.auth, authRouter)
+    this.#APP.use(this.#PATH.user, userRoute);
+    this.#APP.use(this.#PATH.auth, authRouter);
+    this.#APP.use(this.#PATH.offer,offRoute)
   }
 
   initServer() {
@@ -44,4 +47,4 @@ class Server {
   }
 }
 
-module.exports = Server
+module.exports = Server;

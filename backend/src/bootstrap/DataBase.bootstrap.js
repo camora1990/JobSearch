@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const { config } = require("../config/config");
-const categories = require("../data/defaultCategories");
-const countries = require("../data/defaultCountries");
-const { countryModel, categoryModel } = require("../models");
+const loadinitialData = require("../helpers/loadInitialdata.helper");
 
 class DataBase {
   #CONNECTION_STRING;
@@ -38,18 +36,7 @@ class DataBase {
 
   async initializeData() {
     try {
-      this.#deleteData()
-      await countryModel.insertMany(countries);
-      await categoryModel.insertMany(categories);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async #deleteData() {
-    try {
-      await countryModel.deleteMany()
-      await categoryModel.deleteMany()
+      await loadinitialData();
     } catch (error) {
       console.log(error);
     }

@@ -7,6 +7,7 @@ const generateJWT = (user) => {
     name: user.name,
     city: user.city,
     role: user.role,
+    id:user._id
   };
   return new Promise((resolve, reject) => {
     jwt.sign(

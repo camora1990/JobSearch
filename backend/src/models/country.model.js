@@ -4,6 +4,7 @@ const countrySchema = new Schema({
   country: {
     type: String,
     required: true,
+    unique: true
   },
 });
 

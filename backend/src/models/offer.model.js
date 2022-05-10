@@ -2,21 +2,39 @@ const { Schema, model } = require("mongoose");
 
 const offerSchema = new Schema(
   {
-    offer: {
+    name: {
       type: String,
       required: true,
     },
-    employer: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     country: {
-      type: String,
-      require: true,
+      type: Schema.Types.ObjectId,
+      ref: "Country",
+      required: true,
     },
     category: {
       type: Schema.Types.ObjectId,
-      ref: "Categoty",
+      required: true,
+      ref: "Category",
+    },
+    details: {
+      salary: {
+        type: Number,
+        required: true,
+      },
+      modality: {
+        type: String,
+        enum: ["REMOTO", "HIBRIDO", "PRESENCIAL"],
+        required: true,
+      },
+      seniority: {
+        type: String,
+        enum: ["JUNIOR", "SEMI-SENIOR", "MID-SENIOR", "SENIOR"],
+      }
     },
   },
   { timestamps: true }
