@@ -2,7 +2,10 @@ const { Router } = require("express");
 const OfferService = require("../services/ofert.service");
 const { check } = require("express-validator");
 const { validateField } = require("../middlewares/validateField");
-const { validateJWT } = require("../middlewares/validation.middleware");
+const {
+  validateJWT,
+  validateRoleEmployeer,
+} = require("../middlewares/validation.middleware");
 
 class OfferRoute {
   #router;
@@ -14,7 +17,11 @@ class OfferRoute {
   }
 
   #routes() {
-    this.#router.post("/", [validateJWT], this.#offerService.post);
+    this.#router.post(
+      "/",
+      [validateJWT, validateRoleEmployeer],
+      this.#offerService.post
+    );
     this.#router.get(
       "/:id",
       [
@@ -23,6 +30,12 @@ class OfferRoute {
         validateField,
       ],
       this.#offerService.getOffertByUser
+    );
+    this.#router.get("/",
+      [
+        validateJWT,
+      ],
+      this.#offerService.getofferts
     );
   }
 

@@ -16,6 +16,7 @@ const offerSchema = new Schema(
       ref: "Country",
       required: true,
     },
+
     category: {
       type: Schema.Types.ObjectId,
       required: true,
@@ -34,7 +35,11 @@ const offerSchema = new Schema(
       seniority: {
         type: String,
         enum: ["JUNIOR", "SEMI-SENIOR", "MID-SENIOR", "SENIOR"],
-      }
+      },
+      description: {
+        type: String,
+        required: true,
+      },
     },
   },
   { timestamps: true }

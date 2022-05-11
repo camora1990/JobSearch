@@ -5,7 +5,7 @@ const { offerModel } = require("../models");
 class OfferService {
   async post(req = request, res = response) {
     const { name, country, category, details } = req.body;
-    const user = req.payload.id
+    const user = req.payload.id;
     try {
       const offer = new offerModel({ name, country, category, details, user });
       await offer.save();
@@ -18,7 +18,7 @@ class OfferService {
   }
 
   async getOffertByUser(req = request, res = response) {
-    const {id} = req.params
+    const { id } = req.params;
     try {
       const offers = await offerModel
         .find({ user: id })
@@ -27,6 +27,37 @@ class OfferService {
       return res.status(200).json(response);
     } catch (error) {
       const response = responseMessage(false, 500, error.message);
+      return res.status(500).json(response);
+    }
+  }
+
+  async getofferts(req = request, res = response) {
+    const country = req.query.country || null;
+    const category = req.query.category || null;
+    let response;
+    try {
+      let offers;
+      if (country && category) {
+        offers = await offerModel
+          .find({ country, category })
+          .populate(["country", "category", "user"]);
+
+        response = responseMessage(true, 200, "list offerts", offers);
+        return res.status(200).json({ response });
+      }
+      if (country || category) {
+        offers = await offerModel
+          .find({ $or: [{ country: country }, { category: category }] })
+          .populate(["country", "category", "user"]);
+
+        response = responseMessage(true, 200, "list offerts", offers);
+        return res.status(200).json({ response });
+      }
+      offers = await offerModel.find();
+      response = responseMessage(true, 200, "list offerts", offers);
+      return res.status(200).json({ response });
+    } catch (error) {
+      response = responseMessage(false, 500, error.message);
       return res.status(500).json(response);
     }
   }
