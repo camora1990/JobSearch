@@ -24,6 +24,8 @@ const generateJWT = (user) => {
   });
 };
 
+
+
 module.exports = {
   generateJWT,
 };

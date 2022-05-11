@@ -2,6 +2,7 @@ const { Router } = require("express");
 const OfferService = require("../services/ofert.service");
 const { check } = require("express-validator");
 const { validateField } = require("../middlewares/validateField");
+const { validateJWT } = require("../middlewares/validation.middleware");
 
 class OfferRoute {
   #router;
@@ -13,10 +14,14 @@ class OfferRoute {
   }
 
   #routes() {
-    this.#router.post("/", this.#offerService.post);
+    this.#router.post("/", [validateJWT], this.#offerService.post);
     this.#router.get(
       "/:id",
-      [check("id", "Id is invalid mongo id").isMongoId(), validateField],
+      [
+        validateJWT,
+        check("id", "Id is invalid mongo id").isMongoId(),
+        validateField,
+      ],
       this.#offerService.getOffertByUser
     );
   }

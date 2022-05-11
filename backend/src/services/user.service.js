@@ -21,6 +21,16 @@ class UserService {
       return res.status(500).json(response);
     }
   }
+  async getUsers(req = request, res = response){
+    try {
+      const users = await userModel.find()
+      const response = responseMessage(true, 200, "all users", users);
+      return res.status(200).json(response)
+    } catch (error) {
+      const response = responseMessage(false, 500, error.message);
+      return res.status(500).json(response);
+    }
+  }
 }
 
 module.exports = UserService;

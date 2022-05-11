@@ -2,6 +2,7 @@ const { Router } = require("express");
 const UserService = require("../services/user.service");
 const { check } = require("express-validator");
 const { validateField } = require("../middlewares/validateField");
+const { validateJWT } = require("../middlewares/validation.middleware");
 
 class UserRoute {
   #router;
@@ -15,9 +16,10 @@ class UserRoute {
   #routes() {
     this.#router.post(
       "/",
-      [check("email","Email invalido").isEmail(), validateField],
+      [validateJWT,check("email","Email invalido").isEmail(), validateField],
       this.#userService.post
     );
+    this.#router.get("/", validateJWT, this.#userService.getUsers)
   }
 
   get router() {

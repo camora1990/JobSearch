@@ -4,7 +4,8 @@ const { offerModel } = require("../models");
 
 class OfferService {
   async post(req = request, res = response) {
-    const { name, country, category, details, user } = req.body;
+    const { name, country, category, details } = req.body;
+    const user = req.payload.id
     try {
       const offer = new offerModel({ name, country, category, details, user });
       await offer.save();
