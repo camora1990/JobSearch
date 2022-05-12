@@ -4,6 +4,7 @@ const { config } = require("../config/config");
 const { userRoute } = require("../routes/user.route");
 const { authRouter } = require("../routes/auth.route");
 const { offRoute } = require("../routes/offer.route");
+const { aapplicationRouter } = require("../routes/application.route");
 
 class Server {
   #PORT;
@@ -17,6 +18,7 @@ class Server {
       user: "/api/v1/user",
       auth: "/api/v1/login",
       offer: "/api/v1/offer",
+      application: "/api/v1/application",
     };
     this.#middleware();
     this.#routes();
@@ -31,7 +33,8 @@ class Server {
   #routes() {
     this.#APP.use(this.#PATH.user, userRoute);
     this.#APP.use(this.#PATH.auth, authRouter);
-    this.#APP.use(this.#PATH.offer,offRoute)
+    this.#APP.use(this.#PATH.offer, offRoute);
+    this.#APP.use(this.#PATH.application, aapplicationRouter);
   }
 
   initServer() {

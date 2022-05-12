@@ -45,4 +45,4 @@ const offerSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("offer", offerSchema);
+module.exports = model("Offer", offerSchema);

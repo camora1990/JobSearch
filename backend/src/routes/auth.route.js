@@ -15,7 +15,11 @@ class AuthRoute {
   #routes() {
     this.#router.post(
       "/",
-      [check("email", "Email invalido").isEmail(), validateField],
+      [
+        check("email", "Email invalido").isEmail(),
+       
+        validateField,
+      ],
       this.#authService.post
     );
   }

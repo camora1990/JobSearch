@@ -24,16 +24,22 @@ const userSchema = new Schema(
       default: "USER",
       message: "Invalid role [ADMIN, EMPLOYER, USER]",
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );
 
 userSchema.pre("save", async function (next) {
-  try {
-    this.password = await encryptPassword(this.password);
-    next();
-  } catch (error) {
-    console.log("error en preUserschema", error);
+  if (this.isNew) {
+    try {
+      this.password = await encryptPassword(this.password);
+      next();
+    } catch (error) {
+      console.log("error en preUserschema", error);
+    }
   }
 });
 

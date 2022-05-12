@@ -32,10 +32,19 @@ const validateRoleEmployeer = (req = request, res = response, next) => {
 
     return res.status(401).json(message);
   }
+  next();
+};
+
+const validateRoleAdmin = (req = request, res = response, next) => {
+  if (req.payload.role !== "ADMIN") {
+    const message = responseMessage(false,401,"unauthorized user")
+    return res.status(401).json(message)
+  }
   next()
 };
 
 module.exports = {
   validateJWT,
   validateRoleEmployeer,
+  validateRoleAdmin
 };
