@@ -65,15 +65,15 @@ Para más información diríjase al archivo `.env.ejemplo`
 
 # __Especificaciones Generales__
 
-Se trata de una API que registrará por parte las empresas empleadoras o consultoras de talent search posiciones laborales buscadas en el mercado.
-Existen diferentes categorías de skill, distintas modalidades de trabajo y dichas busquedas se desarrollarán para diferentes paises
+Se trata de una API que registrará por parte de las empresas empleadoras o consultoras de talent search, posiciones laborales buscadas en el mercado de IT.
+Existen diferentes categorías de skill, distintas modalidades de trabajo y dichas busquedas que se desarrollarán para diferentes paises
 ## Historia de Usuario - Épicas
 <br>
 <p align="center">
   <img  src="./backend/doc/hu.jpg/" />
 </p>
 
-__IMPORTANTE__: Se controlará a través de un token la autorización a las siguientes funcionalidades de acuerdo a si es pertinente al tipo de usuario.
+__IMPORTANTE__: Se controlará a través de un token de REGISTRO DE SESIÓN la autorización a las siguientes funcionalidades de acuerdo los privilegios del ROL de cada LOGIN.
 
 # Operaciones para el rol EMPLOYER
  
@@ -97,16 +97,17 @@ __IMPORTANTE__: Se controlará a través de un token la autorización a las sigu
     - Country
     - Category
  - Podrá APLICAR a ofertas laborales
- - Podrá DESAPLICAR a ofertas laborales 
- __ADVERTENCIA__: Al desaplicar a las ofertas laborales USER perderá dicha afectación, se recomienta que front end se cerciore antes de realizar el pedido a la ruta dado que no se guarda en un status de "eliminado" y no se podrá recuperar salvo que se vuelva a ejecutar todo el procedimiento de hallazgo de dicha oferta.
+ - Podrá DESAPLICAR a ofertas laborales
+ <br>
+ __ADVERTENCIA__: Al desaplicar a las ofertas laborales USER perderá dicha afectación, se recomienta que front end se cerciore antes de realizar el pedido a la ruta dado que no se guarda en un status de "eliminado" y no se podrá recuperar salvo que se vuelva a ejecutar todo el procedimiento de hallazgo de dicha oferta nuevamente.
  
 
 # Funcionalidades del rol ADMINISTRATOR
  
   - ADMIN puede crear, borrar, modificar y consultar USUARIOS.
-  - ADMIN puede crear, borrar, modificar y consultar OARAMETROS  (las tablas COUNTRY y CATEGORY)
+  - ADMIN puede crear, borrar, modificar y consultar PARAMETROS  (las tablas COUNTRY y CATEGORY)
 
-__IMPORTANTE__: No se desarrolla un borrado definitivo de los usuarios, se aplica una eliminación lógica a través de un campo status que podrá reestablecerse a true mediante de un UPDATE del miemo.
+__IMPORTANTE__: No se desarrolla un borrado definitivo de los usuarios, se aplica una eliminación lógica a través de un campo status que podrá reestablecerse a true mediante de un UPDATE del mismo.
 
 
 #### Tecnologías necesarias:
@@ -116,9 +117,10 @@ __IMPORTANTE__: No se desarrolla un borrado definitivo de los usuarios, se aplic
 - [ ] Node 
 
 
-#### Base de datos - Diagrama Entidad Relación
+## __Base de datos:__
 
 El modelo de la base de datos se implementa en MONGODB con las siguientes tablas y referencias:
+<br><br>
 
 # __Diagrama Entidad Relación__  
 <br>
