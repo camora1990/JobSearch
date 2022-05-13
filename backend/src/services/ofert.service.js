@@ -56,7 +56,7 @@ class OfferService {
         response = responseMessage(true, 200, "list offerts", offers);
         return res.status(200).json({ response });
       }
-      offers = await offerModel.find({ status: true });
+      offers = await offerModel.find({ status: true }).populate(["country", "category", "user"]);
       response = responseMessage(true, 200, "list offerts", offers);
       return res.status(200).json({ response });
     } catch (error) {
