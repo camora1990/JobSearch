@@ -23,6 +23,7 @@ const userSchema = new Schema(
       enum: validRoles,
       default: "USER",
       message: "Invalid role [ADMIN, EMPLOYER, USER]",
+      required: true
     },
     status: {
       type: Boolean,

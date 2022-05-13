@@ -1,13 +1,14 @@
 const { request, response } = require("express");
 const responseMessage = require("../helpers/messages.helper");
-const { applicationModel } = require("../models");
-const { where } = require("../models/user.model");
+const { applicationModel, offerModel } = require("../models");
 
 class ApplicationService {
   async post(req = request, res = response) {
-    const { user, offer,employer } = req.body;
+    const { offer } = req.body;
+    const { id: user } = req.payload;
     try {
-      const application = new applicationModel({ user, offer ,employer});
+      const { user: employer } = await offerModel.findOne({ _id: offer });
+      const application = new applicationModel({ user, offer, employer });
       await application.save();
       const response = responseMessage(
         true,
@@ -22,31 +23,47 @@ class ApplicationService {
     }
   }
 
-  async getOffert(req = request, res = response) {
+  async getApplications(req = request, res = response) {
+    const { id, role } = req.payload;
     try {
-      const a = await applicationModel.find({employer:"627d0de429fdfa8e182ff023"})
-        // .aggregate([
-        //   {
-        //     $lookup: {
-        //       from: "offer",
-        //       localField: "offer",
-        //       foreignField: "_id",
-        //       as: "offer",
-        //     },
-        //   },
-        //   {$match:{"offer.user":"627c73520e33121acf553116" }}
-        // ])
+      const applications =
+        role === "EMPLOYER"
+          ? await applicationModel
+              .find({
+                employer: id,
+              })
+              .populate(["user", "employer", "offer"])
+          : await applicationModel
+              .find({
+                user: id,
+              })
+              .populate(["user", "employer", "offer"]);
 
-        // .find({ offer: { user: "627c73520e33121acf553116" } })
-        // .populate("offer");
+      const response = responseMessage(
+        true,
+        201,
+        "list applications",
+        applications
+      );
+      return res.status(200).json(response);
+    } catch (error) {
+      const response = responseMessage(false, 500, error.message);
+      return res.status(500).json(response);
+    }
+  }
 
-      // const response = responseMessage(
-      //   true,
-      //   201,
-      //   "successful application ",
-      //   applications
-      // );
-      return res.status(200).json(a);
+  async deleteApplication(req = request, res = response) {
+    const { id } = req.payload;
+    const { id: applicationId } = req.params;
+    try {
+      const application = await applicationModel.findById(applicationId);
+      if (application.user === id) {
+        await applicationModel.findByIdAndDelete(applicationId);
+        const response = responseMessage(true, 201, "application deleted");
+        return res.status(200).json(response);
+      }
+      const response = responseMessage(false, 401, "unauthorized user");
+      return res.status(401).json(response);
     } catch (error) {
       const response = responseMessage(false, 500, error.message);
       return res.status(500).json(response);

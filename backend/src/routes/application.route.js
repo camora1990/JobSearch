@@ -1,5 +1,8 @@
 const express = require("express");
 const ApplicationService = require("../services/application.service");
+const { check } = require("express-validator");
+const { validateField } = require("../middlewares/validateField");
+const { validateJWT } = require("../middlewares/validation.middleware");
 
 class ApplicationRoute {
   #router;
@@ -10,9 +13,23 @@ class ApplicationRoute {
     this.#route();
   }
   #route() {
-    this.#router.post("/", this.#applicationService.post);
+    this.#router.post("/", [validateJWT], this.#applicationService.post);
 
-    this.#router.get("/",this.#applicationService.getOffert)
+    this.#router.get(
+      "/",
+      validateJWT,
+      this.#applicationService.getApplications
+    );
+
+    this.#router.delete(
+      "/:id",
+      [
+        validateJWT,
+        check("id", "id is not valid Mongo id").isMongoId(),
+        validateField,
+      ],
+      this.#applicationService.deleteApplication
+    );
   }
 
   get router() {

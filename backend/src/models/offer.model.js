@@ -22,6 +22,7 @@ const offerSchema = new Schema(
       required: true,
       ref: "Category",
     },
+    
     details: {
       salary: {
         type: Number,
@@ -40,6 +41,10 @@ const offerSchema = new Schema(
         type: String,
         required: true,
       },
+    },
+    status: {
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }

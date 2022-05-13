@@ -22,6 +22,7 @@ class OfferRoute {
       [validateJWT, validateRoleEmployeer],
       this.#offerService.post
     );
+
     this.#router.get(
       "/:id",
       [
@@ -31,11 +32,29 @@ class OfferRoute {
       ],
       this.#offerService.getOffertByUser
     );
-    this.#router.get("/",
+
+    this.#router.get("/", [validateJWT], this.#offerService.getofferts);
+
+    this.#router.delete(
+      "/:id",
       [
         validateJWT,
+        validateRoleEmployeer,
+        check("id", "Id is invalid mongo id").isMongoId(),
+        validateField,
       ],
-      this.#offerService.getofferts
+      this.#offerService.deleteoffert
+    );
+
+    this.#router.put(
+      "/:id",
+      [
+        validateJWT,
+        validateRoleEmployeer,
+        check("id", "Id is invalid mongo id").isMongoId(),
+        validateField,
+      ],
+      this.#offerService.putOffer
     );
   }
 
