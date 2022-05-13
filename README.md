@@ -89,23 +89,11 @@ __IMPORTANTE__: Se controlará a través deun token la autorización pertinente 
 
 __IMPORTANTE__: Se controlará a través deun token la autorización pertinente al tipo de usuario.
 
-### Endpoints/Flags:
-<br>
-<p align="left">
-  <img  height="50
-  " src="./backend/doc/foldertzu.png/" />
-</p>
-
-  - GET https://pokeapi.co/api/v2/pokemon
-  - GET https://pokeapi.co/api/v2/pokemon/{id}
-  - GET https://pokeapi.co/api/v2/pokemon/{name}
-  - GET https://pokeapi.co/api/v2/type
-
 
 #### Tecnologías necesarias:
 
 - [ ] Express
-- [ ] Mongoose 
+- [ ] Mongo 
 - [ ] Node 
 
 
@@ -120,12 +108,24 @@ El modelo de la base de datos se implementa en MONGODB con las siguientes tablas
 </p>
 
 
+<br>
 
-#### API REST
+# __API REST__
+
+
 
 Servidor en Node/Express con las siguientes rutas:
 
 __URL BASE__: http://localhost:PORT/api/v1
+<br>
+<br>
+
+# __Endpoints/Flags:__
+<br>
+<p align="left">
+  <img  height="50
+  " src="./backend/doc/foldertzu.png/" />
+</p>
 
 # END POINTS USERS
 
