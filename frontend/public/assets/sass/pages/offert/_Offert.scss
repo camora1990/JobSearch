@@ -1,0 +1,67 @@
+/*#####################################
+INÍCIA SECCIÓN OFFERT
+#####################################*/
+
+.card-offert {
+
+  box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
+    0 5px 15px 0 rgba(37, 44, 97, 0.15);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.card-offert
+.card-title {
+  color: $secondary-color;
+  text-transform: uppercase;
+}
+
+.card-offert span{
+  color: $secondary-color;
+  opacity: .5;
+}
+.card-offert .card-footer{
+  border-top: 1px solid $secondary-color;
+  opacity: .8;
+}
+
+
+.col-12 .card-offert:hover {
+  transition: all .9s ease;
+  transform: scale(1.1);
+
+}
+
+.card-offert p{
+  opacity: .7;
+}
+.hover_color_bubble {
+  position: absolute;
+  background: rgb(112 103 103 / 15%);
+  width: 100rem;
+  height: 100rem;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  top: 16rem;
+  border-radius: 50%;
+  transform: rotate(-36deg);
+  left: -18rem;
+  transition: 0.7s;
+}
+
+.card-offert:hover .hover_color_bubble {
+  top: 0rem;
+}
+
+
+
+/*#####################################
+FINALIZA SECCIÓN OFFERT
+#####################################*/
+
+
+
+
+
+
