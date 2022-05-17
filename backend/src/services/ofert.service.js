@@ -43,7 +43,7 @@ class OfferService {
           .populate(["country", "category", "user"]);
 
         response = responseMessage(true, 200, "list offerts", offers);
-        return res.status(200).json({ response });
+        return res.status(200).json(response );
       }
       if (country || category) {
         offers = await offerModel
@@ -54,11 +54,11 @@ class OfferService {
           .populate(["country", "category", "user"]);
 
         response = responseMessage(true, 200, "list offerts", offers);
-        return res.status(200).json({ response });
+        return res.status(200).json(response );
       }
       offers = await offerModel.find({ status: true }).populate(["country", "category", "user"]);
       response = responseMessage(true, 200, "list offerts", offers);
-      return res.status(200).json({ response });
+      return res.status(200).json( response );
     } catch (error) {
       response = responseMessage(false, 500, error.message);
       return res.status(500).json(response);

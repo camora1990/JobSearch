@@ -12,7 +12,11 @@ class UserService {
       await user.save();
       const token = await generateJWT(user);
       const response = responseMessage(true, 200, "user created", {
-        user: user,
+        email: user.email,
+        name: user.name,
+        city: user.city,
+        role: user.role,
+        id: user._id,
         token,
       });
       return res.status(200).json(response);
