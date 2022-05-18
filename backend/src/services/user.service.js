@@ -12,7 +12,7 @@ class UserService {
       await user.save();
       const token = await generateJWT(user);
       const response = responseMessage(true, 200, "user created", {
-        email: user.email,
+        email: user.email.toUpperCase(),
         name: user.name,
         city: user.city,
         role: user.role,

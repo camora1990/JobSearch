@@ -5,6 +5,8 @@ const { userRoute } = require("../routes/user.route");
 const { authRouter } = require("../routes/auth.route");
 const { offRoute } = require("../routes/offer.route");
 const { aapplicationRouter } = require("../routes/application.route");
+const { categoryRoute } = require("../routes/category.route");
+const { countryRoute } = require("../routes/country.route");
 
 class Server {
   #PORT;
@@ -19,6 +21,8 @@ class Server {
       auth: "/api/v1/login",
       offer: "/api/v1/offer",
       application: "/api/v1/application",
+      category: "/api/v1/category",
+      country: "/api/v1/country",
     };
     this.#middleware();
     this.#routes();
@@ -35,6 +39,8 @@ class Server {
     this.#APP.use(this.#PATH.auth, authRouter);
     this.#APP.use(this.#PATH.offer, offRoute);
     this.#APP.use(this.#PATH.application, aapplicationRouter);
+    this.#APP.use(this.#PATH.category, categoryRoute);
+    this.#APP.use(this.#PATH.country, countryRoute);
   }
 
   initServer() {
