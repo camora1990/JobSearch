@@ -14,15 +14,13 @@ INÍCIA SECCIÓN OFFERT
 .card-title {
   color: $secondary-color;
   text-transform: uppercase;
+  font-size: 1rem;
+
 }
 
 .card-offert span{
   color: $secondary-color;
   opacity: .5;
-}
-.card-offert .card-footer{
-  border-top: 1px solid $secondary-color;
-  opacity: .8;
 }
 
 
@@ -52,6 +50,14 @@ INÍCIA SECCIÓN OFFERT
 
 .card-offert:hover .hover_color_bubble {
   top: 0rem;
+}
+
+.card-offert{
+  &_category{
+    .category-item{
+      font-size: 12px;
+    }
+  }
 }
 
 

@@ -16,6 +16,7 @@ export const Login = () => {
   const [formValues, handleInputChange, resetForm] = useForm(initialState);
 
   const loginUser = async () => {
+    debugger;
     try {
       const { data } = await axios.post("/login", formValues);
       dispatch({
@@ -28,7 +29,7 @@ export const Login = () => {
         title: `Welcome ${data.data.name}`,
         showConfirmButton: false,
         timer: 2000,
-        background: "#212529"
+        background: "#212529",
       });
     } catch (error) {
       console.log(error);
@@ -36,6 +37,7 @@ export const Login = () => {
   };
 
   const registerUser = async () => {
+    debugger
     try {
       const { data } = await axios.post("/user", formValues);
       dispatch({
@@ -67,11 +69,15 @@ export const Login = () => {
     handleInputChange(e);
   };
   return (
-    <div className="container h-100 mt-5 animate__animated animate__rubberBand">
+    <div className="container h-100 mt-5 ">
       <div className="d-flex row justify-content-center aling-items-center h-100">
         <div className="col-12 col-md-9 col-lg-6 col-xl-4 position-relative">
           <div className="card custom-card  text-light bg-dark">
-            <img className="card-img-top" src="/assets/images/jobSearch24ejes.png" alt="" />
+            <img
+              className="card-img-top"
+              src="/assets/images/jobSearch24ejes.png"
+              alt=""
+            />
             <div className="card-body p-4">
               <h2 className="text-uppercase text-center mb-5">
                 {login ? "LOGIN" : "REGISTER"}
