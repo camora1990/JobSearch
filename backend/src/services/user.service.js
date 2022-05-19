@@ -21,7 +21,12 @@ class UserService {
       });
       return res.status(200).json(response);
     } catch (error) {
-      const response = responseMessage(false, 500, error.message);
+      let response;
+      if(error.code===11000){
+         response = responseMessage(false, 400, `the email ${email} is already registered`);
+         return res.status(400).json(response);
+    }
+       response = responseMessage(false, 500, error.message);
       return res.status(500).json(response);
     }
   }

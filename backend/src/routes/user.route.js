@@ -20,7 +20,7 @@ class UserRoute {
     this.#router.post(
       "/",
       [
-        check("email", "Email invalido").isEmail(),
+        check("email", "Invalid Email").isEmail(),
         check("password")
           .matches(
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
