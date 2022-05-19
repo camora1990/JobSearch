@@ -3,6 +3,10 @@ INÍCIA SECCIÓN NAVBAR
 #####################################*/
 nav {
   @include generate-box-shadow($dark-color);
+  img{
+    max-height: 55px;
+    max-width: 120px;
+  }
 }
 
 /*#####################################

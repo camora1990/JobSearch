@@ -4,6 +4,8 @@ import { AuthContext } from "../../context/auth/authContext";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
 
+import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+
 export const Offert = () => {
   const { user } = useContext(AuthContext);
   const options = { headers: { Authorization: `Bearer ${user.token}` } };
@@ -13,6 +15,7 @@ export const Offert = () => {
   const [category, setCategory] = useState("");
   const [country, setcountry] = useState("");
   const [filter, setfilter] = useState(false);
+  const [loading, setloading] = useState(true);
 
   const handleChangeCountry = (e) => {
     setcountry(e.target.value);
@@ -22,12 +25,15 @@ export const Offert = () => {
   };
 
   useEffect(() => {
+    setloading(true);
     axios
       .get("/category", options)
       .then((data) => {
         setcategories(data.data.data);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+      });
     axios
       .get("/country/", options)
       .then((data) => {
@@ -37,6 +43,7 @@ export const Offert = () => {
   }, []);
 
   useEffect(() => {
+    setloading(true);
     if (!filter) {
       setCategory("");
       setcountry("");
@@ -47,54 +54,64 @@ export const Offert = () => {
           .then((data) => {
             setofferts(data.data.data);
           })
-          .catch((err) => console.error(err))
+          .catch((err) => {
+            setloading(false);
+            console.error(err);
+          })
       : axios
           .get("/offer", options)
           .then((data) => {
             setofferts(data.data.data);
           })
-          .catch((err) => console.error(err));
+          .catch((err) => {
+            setloading(false);
+            console.error(err);
+          });
+    setloading(false);
   }, [filter]);
 
   return (
     <>
-      <div className="row d-flex justify-content-center mt-5">
-        <div className="col-12 col-lg-6  d-flex p-2">
-          <select
-            className="form-select mx-2"
-            value={category}
-            onChange={handleChangeCategory}
-          >
-            <option value="">Select category</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.category}
-              </option>
-            ))}
-          </select>
-          <select
-            className="form-select mx-2"
-            value={country}
-            onChange={handleChangeCountry}
-          >
-            <option value="">Select country</option>
-            {countries.map((country) => (
-              <option key={country._id} value={country._id}>
-                {country.country}
-              </option>
-            ))}
-          </select>
-          <button
-            className="button"
-            onClick={() => {
-              (country || category) && setfilter(!filter);
-            }}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span> {filter ? "Clear" : "Search"}
-          </button>
+      {loading && <LoadingSpinner />}
+      <div className="filter-section">
+        <div className="row d-flex justify-content-center mt-5">
+          <div className="col-12 col-lg-6  d-flex p-2">
+            <select
+              className="form-select mx-2 bg-dark text-light"
+              value={category}
+              onChange={handleChangeCategory}
+            >
+              <option value="">Select category</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.category}
+                </option>
+              ))}
+            </select>
+            <select
+              className="form-select mx-2 bg-dark text-light"
+              value={country}
+              onChange={handleChangeCountry}
+            >
+              <option value="">Select country</option>
+              {countries.map((country) => (
+                <option key={country._id} value={country._id}>
+                  {country.country}
+                </option>
+              ))}
+            </select>
+            <button
+              className="button"
+              onClick={() => {
+                (country || category) && setfilter(!filter);
+              }}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span> {filter ? "Clear" : "Search"}
+            </button>
+          </div>
         </div>
       </div>
 
