@@ -7,7 +7,6 @@ function Loading(){
             <spinner color="white" />
              <br/>  <br/> <br/> <br/> 
         </div>
-
 )
 
 } 

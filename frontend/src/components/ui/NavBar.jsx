@@ -8,6 +8,11 @@ export const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3">
       <div className="container-fluid container">
+      {/* <img
+              className="card-img-top"
+              src="/assets/images/jobSearchBrand.png"
+              alt=""
+            /> */}
         <button
           className="navbar-toggler"
           type="button"
