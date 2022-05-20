@@ -9,8 +9,8 @@ import { createErrorMessage } from "../../helpers/responseErrorMessage";
 
 export const Login = () => {
   const initialState = {
-    email: "",
-    password: "",
+    email: "CORREO3@CORREO.COM",
+    password: "A12345678*",
     name: "",
     role: "USER",
   };

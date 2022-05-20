@@ -5,6 +5,9 @@ import moment from "moment";
 import { NavLink } from "react-router-dom";
 
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { createErrorMessage } from "../../helpers/responseErrorMessage";
+import { errormesage } from "../../helpers/alertMessages";
+import AlertComponent from "../../components/ui/AlertComponent";
 
 export const Offert = () => {
   const { user } = useContext(AuthContext);
@@ -20,26 +23,43 @@ export const Offert = () => {
   const handleChangeCountry = (e) => {
     setcountry(e.target.value);
   };
+
   const handleChangeCategory = (e) => {
     setCategory(e.target.value);
   };
 
+  const getDataFilter = async () => {
+    try {
+      const [{ data: responseCategory }, { data: responseCountry }] =
+        await Promise.all([
+          axios.get("/category", options),
+          axios.get("/country/", options),
+        ]);
+      setcategories(responseCategory.data);
+      setCountries(responseCountry.data);
+    } catch (error) {
+      const responseError = createErrorMessage(error);
+      errormesage(responseError);
+      console.error(error);
+    }
+  };
+
+  const getOfferts = async (url) => {
+    try {
+      const { data: response } = await axios.get(url, options);
+      setofferts(response.data);
+    } catch (error) {
+      setloading(false);
+      console.error(error);
+      const responseError = createErrorMessage(error);
+      errormesage(responseError);
+    }
+    setloading(false);
+  };
+
   useEffect(() => {
     setloading(true);
-    axios
-      .get("/category", options)
-      .then((data) => {
-        setcategories(data.data.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    axios
-      .get("/country/", options)
-      .then((data) => {
-        setCountries(data.data.data);
-      })
-      .catch((err) => console.error(err));
+    getDataFilter();
   }, []);
 
   useEffect(() => {
@@ -48,31 +68,23 @@ export const Offert = () => {
       setCategory("");
       setcountry("");
     }
-    filter
-      ? axios
-          .get(`/offer?country=${country}&category=${category}`, options)
-          .then((data) => {
-            setofferts(data.data.data);
-          })
-          .catch((err) => {
-            setloading(false);
-            console.error(err);
-          })
-      : axios
-          .get("/offer", options)
-          .then((data) => {
-            setofferts(data.data.data);
-          })
-          .catch((err) => {
-            setloading(false);
-            console.error(err);
-          });
-    setloading(false);
+    const url = filter
+      ? `/offer?country=${country}&category=${category}`
+      : "/offer";
+    getOfferts(url);
   }, [filter]);
+
+  const alertMessaje = {
+    notFoundFilter:
+      "We are sorry at this time we do not have offers available for your search criterial",
+    NotOfferts:
+      "We are sorry we still do not have offers available in the application for any type of category or country",
+  };
 
   return (
     <>
       {loading && <LoadingSpinner />}
+
       <div className="filter-section">
         <div className="row d-flex justify-content-center mt-5">
           <div className="col-12 col-lg-6  d-flex p-2">
@@ -114,6 +126,15 @@ export const Offert = () => {
           </div>
         </div>
       </div>
+      <div className="mt-5">
+        {(offerts.length == 0 && !loading) && (
+          <AlertComponent
+            message={
+              filter ? alertMessaje.notFoundFilter : alertMessaje.NotOfferts
+            }
+          />
+        )}
+      </div>
 
       <div className="card-deck row mt-3 animate__animated animate__slideInDown">
         {offerts.map((offert) => (
@@ -151,7 +172,7 @@ export const Offert = () => {
                       <span></span>
                       <span></span>
                       <span></span>
-                      <span></span> Read more
+                      <span></span> Apply
                     </button>
                   </NavLink>
                 </div>

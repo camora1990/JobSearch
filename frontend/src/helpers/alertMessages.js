@@ -12,19 +12,18 @@ const successMessage = (message) => {
 };
 
 const errormesage = (html) => {
-  debugger
   Swal.fire({
     icon: "error",
     title: "Oops...",
     background: "#212529",
-    html:html,
+    html: html,
     showClass: {
       popup: "animate__animated animate__fadeInDown",
     },
     hideClass: {
       popup: "animate__animated animate__fadeOutUp",
     },
-  });
+  })
 };
 
 export { successMessage, errormesage };

@@ -12,6 +12,7 @@ export const DashboardRoutes = () => {
         <Routes>
           <Route path="offerts" element={<Offert />} />
           <Route path="my-application" element={<ApplicationScreen />} />
+          <Route path="/" element={<Offert />} />
         </Routes>
       </div>
     </>

@@ -1,30 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const AlertComponent = ({ title, description, footer }) => {
+const AlertComponent = ({ message ,title="Opps......"}) => {
   return (
     <>
-      {" "}
-      <div className="alert bg-dark" role="alert">
-        <h4 className="alert-heading">Well done!</h4>
-        <p>
-                     "BIENVENIDO A JOBSEARCH!!!      
-        </p>
-        <hr />
-        <p className="mb-0">
-        En este panel personal encontrarás todas tus ofertas.
-        </p>
-         
+      <div className="alert alert-secondary bg-dark text-light p-4" role="alert">
+        <div className="w-100 d-flex">
+          <h4 className="alert-heading"> <i className="fa-solid fa-triangle-exclamation me-4" style={{color:"red"}}></i>{title}</h4>
         </div>
-        
+        <p className="mt-3">{message}.</p>
+      </div>
     </>
   );
-};
-
-AlertComponent.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  footer: PropTypes.string.isRequired,
 };
 
 export default AlertComponent;
