@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require('morgan')
 const { config } = require("../config/config");
 const { userRoute } = require("../routes/user.route");
 const { authRouter } = require("../routes/auth.route");
@@ -32,6 +33,7 @@ class Server {
     this.#APP.use(cors({ origin: "*" }));
     this.#APP.use(express.json());
     this.#APP.use(express.urlencoded({ extended: true }));
+    this.#APP.use(morgan("dev"))
   }
 
   #routes() {
