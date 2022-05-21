@@ -9,3 +9,9 @@ export const PublicRoutes = ({ children }) => {
   const {logged} = user;
   return logged ? <Navigate to="/" /> : children;
 };
+
+
+
+
+
+
