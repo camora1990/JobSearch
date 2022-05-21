@@ -67,13 +67,16 @@ export const DetailsOffert = () => {
 
   const handleButtonClick = async () => {
     setLoading(true);
+    debugger
     const body = {
       offer: offer._id,
     };
     try {
       const { data: response } =
         user.role === "EMPLOYER"
-          ? await axios.delete(`/offer/${offer._id}`, options)
+          ? offer.status
+            ? await axios.delete(`/offer/${offer._id}`, options)
+            : await axios.put(`/offer/${offer._id}`, { status: true }, options)
           : await axios.post(`/application`, body, options);
       successMessage(response.message);
       navigate("/offers");
@@ -155,7 +158,12 @@ export const DetailsOffert = () => {
             <span></span>
             <span></span>
             <span></span>
-            <span></span> {user.role === "USER" ? "Apply" : "Inactive offer"}
+            <span></span>{" "}
+            {user.role === "USER"
+              ? "Apply"
+              : offer.status
+              ? "Inactive offer"
+              : "Active offert"}
           </button>
         </div>
       </div>

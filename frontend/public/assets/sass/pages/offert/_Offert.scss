@@ -47,6 +47,18 @@ INÍCIA SECCIÓN OFFERT
       font-size: 12px;
     }
   }
+  .offer-status-active {
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    border-radius: 50%;
+  }
+  .offer-status-inactive {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+  }
 }
 
 .col-12 .card-offert:hover {
@@ -78,7 +90,7 @@ INÍCIA SECCIÓN OFFERT
   top: 0rem;
 }
 
-.card-offert-deatils:hover .hover_color_bubble{
+.card-offert-deatils:hover .hover_color_bubble {
   top: 0rem;
 }
 
