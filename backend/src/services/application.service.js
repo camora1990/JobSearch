@@ -32,12 +32,16 @@ class ApplicationService {
               .find({
                 employer: id,
               })
-              .populate(["user", "employer", "offer"])
+              .populate(["user", "employer"])
+              .populate({ path: "offer", populate: { path: "category" } })
+              .populate({ path: "offer", populate: { path: "country" } })
           : await applicationModel
               .find({
                 user: id,
               })
-              .populate(["user", "employer", "offer"]);
+              .populate(["user", "employer"])
+              .populate({ path: "offer", populate: { path: "category" } })
+              .populate({ path: "offer", populate: { path: "country" } });
 
       const response = responseMessage(
         true,

@@ -35,7 +35,7 @@ class OfferService {
     const { id } = req.params;
     try {
       const offert = await offerModel
-        .findOne({ _id: id, status: true })
+        .findOne({ _id: id })
         .populate(["user", "category", "country"]);
 
       const response = offert
@@ -98,13 +98,13 @@ class OfferService {
   }
 
   async putOffer(req = request, res = response) {
-    const { name, country, category, details } = req.body;
+    const { name, country, category, details,status } = req.body;
     const { id } = req.params;
     try {
       const offer = await offerModel
         .findByIdAndUpdate(
           id,
-          { name, country, category, details },
+          { name, country, category, details,status },
           { new: true }
         )
         .populate(["country", "category"]);
