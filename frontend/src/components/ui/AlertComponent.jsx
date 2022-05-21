@@ -1,6 +1,6 @@
 import React from "react";
 
-const AlertComponent = ({ message ,title="Opps......"}) => {
+const AlertComponent = ({ message ,title="Oops......"}) => {
   return (
     <>
       <div className="alert alert-secondary bg-dark text-light p-4" role="alert">

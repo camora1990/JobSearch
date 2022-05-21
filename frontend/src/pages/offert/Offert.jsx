@@ -45,6 +45,7 @@ export const Offert = () => {
   };
 
   const getOfferts = async (url) => {
+    debugger;
     try {
       const { data: response } = await axios.get(url, options);
       setofferts(response.data);
@@ -64,13 +65,20 @@ export const Offert = () => {
 
   useEffect(() => {
     setloading(true);
+    let url = "";
     if (!filter) {
       setCategory("");
       setcountry("");
     }
-    const url = filter
-      ? `/offer?country=${country}&category=${category}`
-      : "/offer";
+
+    if (user.role === "USER") {
+      url = filter
+        ? `/offer?country=${country}&category=${category}`
+        : "/offer";
+    } else {
+      url = `/offer/employer-offerts/${user.id}`;
+    }
+
     getOfferts(url);
   }, [filter]);
 
@@ -85,7 +93,7 @@ export const Offert = () => {
     <>
       {loading && <LoadingSpinner />}
 
-      <div className="filter-section">
+      {user.role === "USER" && <div className="filter-section">
         <div className="row d-flex justify-content-center mt-5">
           <div className="col-12 col-lg-6  d-flex p-2">
             <select
@@ -125,9 +133,9 @@ export const Offert = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div>}
       <div className="mt-5">
-        {(offerts.length == 0 && !loading) && (
+        {offerts.length === 0 && !loading && (
           <AlertComponent
             message={
               filter ? alertMessaje.notFoundFilter : alertMessaje.NotOfferts
@@ -167,12 +175,12 @@ export const Offert = () => {
                 </div>
 
                 <div className="card-footer bg-transparent text-muted mt-3">
-                  <NavLink to="/deatils">
+                  <NavLink to={`/details/${offert._id}`}>
                     <button className="button">
                       <span></span>
                       <span></span>
                       <span></span>
-                      <span></span> Apply
+                      <span></span> Read more
                     </button>
                   </NavLink>
                 </div>

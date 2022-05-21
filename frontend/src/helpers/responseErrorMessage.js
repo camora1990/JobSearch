@@ -3,9 +3,9 @@ export const createErrorMessage = (error) => {
   let itemError;
   if (error.response.data.message.errors) {
     error.response.data.message.errors.forEach(({ msg }) => {
-      itemError += `<li>${msg}.</li>`;
+      itemError += `<p>${msg}.</p>`;
     });
-    return `<ul >${itemError}.</ul>`;
+    return `<div ">${itemError}.</div>`;
   }
-  return `<ul ><li>${error.response.data.message}</li></ul>`;
+  return `<div ><p>${error.response.data.message}</p></div>`;
 };

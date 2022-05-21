@@ -17,6 +17,7 @@ const errormesage = (html) => {
     title: "Oops...",
     background: "#212529",
     html: html,
+  
     showClass: {
       popup: "animate__animated animate__fadeInDown",
     },

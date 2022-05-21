@@ -2,34 +2,29 @@
 INÍCIA SECCIÓN OFFERT
 #####################################*/
 
-
-.filter-section{
-  select{
+.filter-section {
+  select {
     outline: none;
     scroll-behavior: smooth;
   }
-  option{
+  option {
     background-color: $dark-color !important;
   }
- 
-  select:focus{
+
+  select:focus {
     border-color: $secondary-color !important;
     box-shadow: none !important;
   }
-  select:hover{
+  select:hover {
+    background-color: $dark-color !important;
+  }
+  .form-select select option:hover {
     background-color: $dark-color !important;
   }
 }
-select option:hover{
-  background-color: $dark-color !important;
-}
 
-
-
-
-
-
-.card-offert {
+.card-offert,
+.card-offert-deatils {
   box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
     0 5px 15px 0 rgba(37, 44, 97, 0.15);
   border-radius: 15px;
@@ -59,6 +54,11 @@ select option:hover{
   transform: scale(1.1);
 }
 
+.col-12 .card-offert-deatils:hover {
+  transition: all 0.9s ease;
+  transform: scale(1);
+}
+
 .hover_color_bubble {
   position: absolute;
   background: rgb(112 103 103 / 15%);
@@ -75,6 +75,10 @@ select option:hover{
 }
 
 .card-offert:hover .hover_color_bubble {
+  top: 0rem;
+}
+
+.card-offert-deatils:hover .hover_color_bubble{
   top: 0rem;
 }
 

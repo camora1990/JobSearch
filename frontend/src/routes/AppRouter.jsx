@@ -1,9 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login } from "../pages/login/Login";
-import NotFound from "../pages/NotFound";
 import { DashboardRoutes } from "./DashboardRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
-
 import { PublicRoutes } from "./PublicRoutes";
 
 export const AppRouter = () => {
@@ -26,7 +24,6 @@ export const AppRouter = () => {
             </PrivateRoutes>
           }
         />
-        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

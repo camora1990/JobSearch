@@ -5,7 +5,7 @@ import { types } from "../../types/types";
 export const NavBar = () => {
   const { user, dispatch } = useContext(AuthContext);
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 position-sticky top-0">
       <div className="container-fluid container">
         <Link className="navbar-brand" to="/">
           <img
@@ -32,9 +32,9 @@ export const NavBar = () => {
               <NavLink
                 className={`nav-link ${(navData) =>
                   navData.isActive ? "active" : ""}`}
-                to="/offerts"
+                to="/offers"
               >
-                Offerts <span className="sr-only">(current)</span>
+                Offers <span className="sr-only">(current)</span>
               </NavLink>
             </li>
 
