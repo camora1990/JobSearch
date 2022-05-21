@@ -24,13 +24,23 @@ class OfferRoute {
     );
 
     this.#router.get(
-      "/:id",
+      "/employer-offerts/:id",
       [
         validateJWT,
         check("id", "Id is invalid mongo id").isMongoId(),
         validateField,
       ],
       this.#offerService.getOffertByUser
+    );
+
+    this.#router.get(
+      "/:id",
+      [
+        validateJWT,
+        check("id", "Id is invalid mongo id").isMongoId(),
+        validateField,
+      ],
+      this.#offerService.getOffert
     );
 
     this.#router.get("/", [validateJWT], this.#offerService.getofferts);

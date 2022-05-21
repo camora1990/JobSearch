@@ -2,6 +2,7 @@ const { request, response } = require("express");
 const responseMessage = require("../helpers/messages.helper");
 const jwt = require("jsonwebtoken");
 const { config } = require("../config/config");
+const { applicationModel } = require("../models");
 
 const validateJWT = (req = request, res = response, next) => {
   if (!req.header("Authorization")) {
@@ -43,8 +44,31 @@ const validateRoleAdmin = (req = request, res = response, next) => {
   next()
 };
 
+const validateApplication = async(req = request, res = response, next)=>{
+
+  const {offer} = req.body 
+  const { id: user,email } = req.payload;
+  try {
+    const application = await applicationModel.findOne({user,offer})
+    if (application) {
+      const response = responseMessage(
+        true,
+        400,
+        `The user ${email} already applied this offer`,
+        application
+      );
+      return res.status(400).json(response);
+    }
+  } catch (error) {
+    const response = responseMessage(false, 500, error.message);
+      return res.status(500).json(response);
+  }
+  next()
+}
+
 module.exports = {
   validateJWT,
   validateRoleEmployeer,
-  validateRoleAdmin
+  validateRoleAdmin,
+  validateApplication
 };

@@ -31,6 +31,23 @@ class OfferService {
     }
   }
 
+  async getOffert(req = request, res = response) {
+    const { id } = req.params;
+    try {
+      const offert = await offerModel
+        .findOne({ _id: id, status: true })
+        .populate(["user", "category", "country"]);
+
+      const response = offert
+        ? responseMessage(true, 201, "Offert", offert)
+        : responseMessage(true, 404, "Ofert not found", offert);
+      return res.status(offert ? 200 : 404).json(response);
+    } catch (error) {
+      const response = responseMessage(false, 500, error.message);
+      return res.status(500).json(response);
+    }
+  }
+
   async getofferts(req = request, res = response) {
     const country = req.query.country || null;
     const category = req.query.category || null;
@@ -43,7 +60,7 @@ class OfferService {
           .populate(["country", "category", "user"]);
 
         response = responseMessage(true, 200, "list offerts", offers);
-        return res.status(200).json(response );
+        return res.status(200).json(response);
       }
       if (country || category) {
         offers = await offerModel
@@ -54,11 +71,13 @@ class OfferService {
           .populate(["country", "category", "user"]);
 
         response = responseMessage(true, 200, "list offerts", offers);
-        return res.status(200).json(response );
+        return res.status(200).json(response);
       }
-      offers = await offerModel.find({ status: true }).populate(["country", "category", "user"]);
+      offers = await offerModel
+        .find({ status: true })
+        .populate(["country", "category", "user"]);
       response = responseMessage(true, 200, "list offerts", offers);
-      return res.status(200).json( response );
+      return res.status(200).json(response);
     } catch (error) {
       response = responseMessage(false, 500, error.message);
       return res.status(500).json(response);
@@ -71,7 +90,7 @@ class OfferService {
     try {
       await offerModel.findByIdAndUpdate(id, { status: false });
       const response = responseMessage(true, 200, "offer inactive");
-      return res.status(200).json({ response });
+      return res.status(200).json(response);
     } catch (error) {
       const response = responseMessage(false, 500, error.message);
       return res.status(500).json(response);

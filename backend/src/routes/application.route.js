@@ -2,7 +2,10 @@ const express = require("express");
 const ApplicationService = require("../services/application.service");
 const { check } = require("express-validator");
 const { validateField } = require("../middlewares/validateField");
-const { validateJWT } = require("../middlewares/validation.middleware");
+const {
+  validateJWT,
+  validateApplication,
+} = require("../middlewares/validation.middleware");
 
 class ApplicationRoute {
   #router;
@@ -13,7 +16,11 @@ class ApplicationRoute {
     this.#route();
   }
   #route() {
-    this.#router.post("/", [validateJWT], this.#applicationService.post);
+    this.#router.post(
+      "/",
+      [validateJWT, validateApplication],
+      this.#applicationService.post
+    );
 
     this.#router.get(
       "/",
