@@ -20,6 +20,7 @@ const HomeScreen = () => {
           </h3> 
           </div> <div>  
           <h2>Very good luck!!!!</h2>  
+          <img src="/assets/images/jobSearch-team.png" width="300"  />
              </div>
              </center>
     </div>
