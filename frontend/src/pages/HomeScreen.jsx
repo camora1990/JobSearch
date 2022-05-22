@@ -6,7 +6,7 @@ const HomeScreen = () => {
     <div className="row d-flex justify-content-center mt-5">
        <center><h1>Hello welcome!!!,</h1> </center>
         <div className="col-12 col-lg-6">
-            <video loop src="/assets/videos/jobSearch.mp4" controls type="video/mp4"></video>
+            <video src="/assets/videos/jobSearch.mp4" controls type="video/mp4"></video>
          
         </div>
         <center>
