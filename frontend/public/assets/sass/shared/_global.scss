@@ -21,7 +21,11 @@ body {
 }
 
 .modal{
-  z-index: 50000
+  z-index: 5001;
+}
+
+.swal2-container {
+  z-index: 6000 !important;
 }
 
 /*#####################################

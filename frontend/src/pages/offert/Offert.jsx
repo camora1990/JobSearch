@@ -45,7 +45,15 @@ export const Offert = () => {
     }
   };
 
-  const getOfferts = async (url) => {
+  const getOfferts = async () => {
+    let url = "";
+    if (user.role === "USER") {
+      url = filter
+        ? `/offer?country=${country}&category=${category}`
+        : "/offer";
+    } else {
+      url = `/offer/employer-offerts/${user.id}`;
+    }
     try {
       const { data: response } = await axios.get(url, options);
       setofferts(response.data);
@@ -65,21 +73,13 @@ export const Offert = () => {
 
   useEffect(() => {
     setloading(true);
-    let url = "";
+
     if (!filter) {
       setCategory("");
       setcountry("");
     }
 
-    if (user.role === "USER") {
-      url = filter
-        ? `/offer?country=${country}&category=${category}`
-        : "/offer";
-    } else {
-      url = `/offer/employer-offerts/${user.id}`;
-    }
-
-    getOfferts(url);
+    getOfferts();
   }, [filter]);
 
   const alertMessaje = {
@@ -168,7 +168,11 @@ export const Offert = () => {
                   <h5 className="card-title">{offert.name}</h5>
                   {user.role === "EMPLOYER" && (
                     <div className="d-flex my-3">
-                      <div className={`offer-status-${offert.status?"active":"inactive"} me-3`}></div>{" "}
+                      <div
+                        className={`offer-status-${
+                          offert.status ? "active" : "inactive"
+                        } me-3`}
+                      ></div>{" "}
                       {offert.status ? "Active" : "Inactive"}
                     </div>
                   )}
@@ -215,6 +219,7 @@ export const Offert = () => {
         categories={categories}
         countries={countries}
         options={options}
+        getOfferts={getOfferts}
       />
     </>
   );

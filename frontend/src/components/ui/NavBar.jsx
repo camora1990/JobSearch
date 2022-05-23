@@ -28,25 +28,39 @@ export const NavBar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink
-                className={`nav-link ${(navData) =>
-                  navData.isActive ? "active" : ""}`}
-                to="/offers"
-              >
-                Offers <span className="sr-only">(current)</span>
-              </NavLink>
-            </li>
+            {user.role !== "ADMIN" ? (
+              <>
+                <li className="nav-item">
+                  <NavLink
+                    className={`nav-link ${(navData) =>
+                      navData.isActive ? "active" : ""}`}
+                    to="/offers"
+                  >
+                    Offers <span className="sr-only">(current)</span>
+                  </NavLink>
+                </li>
 
-            <li className="nav-item">
-              <NavLink
-                to="/my-application"
-                className={`nav-link ${(navData) =>
-                  navData.isActive ? "active" : ""}`}
-              >
-                My application
-              </NavLink>
-            </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/my-application"
+                    className={`nav-link ${(navData) =>
+                      navData.isActive ? "active" : ""}`}
+                  >
+                    My application
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <NavLink
+                  to="/admin-user"
+                  className={`nav-link ${(navData) =>
+                    navData.isActive ? "active" : ""}`}
+                >
+                  Admin users
+                </NavLink>
+              </li>
+            )}
           </ul>
           <div className="dropdown d-flex text-light ">
             <ul

@@ -67,7 +67,6 @@ export const DetailsOffert = () => {
 
   const handleButtonClick = async () => {
     setLoading(true);
-    debugger
     const body = {
       offer: offer._id,
     };

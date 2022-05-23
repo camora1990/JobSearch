@@ -4,9 +4,8 @@ import { useForm } from "../hooks/useForm";
 import axios from "axios";
 import { errormesage, successMessage } from "../helpers/alertMessages";
 import { createErrorMessage } from "../helpers/responseErrorMessage";
-import { useNavigate } from "react-router-dom";
 
-export const ModalOffert = ({ countries, categories, options }) => {
+export const ModalOffert = ({ countries, categories, options ,getOfferts}) => {
   const initialState = {
     name: "",
     country: "countries[0]._id",
@@ -22,6 +21,7 @@ export const ModalOffert = ({ countries, categories, options }) => {
 
   const handleSubmitForm = async (e) => {
    
+    e.preventDefault();
     const { salary, modality, seniority, description, ...data } = formValues;
     const body = {
       ...data,
@@ -37,9 +37,9 @@ export const ModalOffert = ({ countries, categories, options }) => {
       closeBtnRef.current.click()
       successMessage(response.message);
       resetForm();
+      getOfferts()
       
     } catch (error) {
-      e.preventDefault();
       const responseError = createErrorMessage(error);
       errormesage(responseError);
     }
