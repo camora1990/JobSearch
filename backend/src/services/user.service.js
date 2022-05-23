@@ -76,7 +76,12 @@ class UserService {
       const response = responseMessage(true, 200, "user update", user);
       return res.status(200).json(response);
     } catch (error) {
-      const response = responseMessage(false, 500, error.message);
+      let response;
+      if(error.code===11000){
+         response = responseMessage(false, 400, `Email ${email} is in use`);
+         return res.status(400).json(response);
+    }
+      response = responseMessage(false, 500, error.message);
       return res.status(500).json(response);
     }
   }

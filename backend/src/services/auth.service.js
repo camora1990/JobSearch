@@ -8,9 +8,9 @@ class AuthService {
   async post(req = request, res = response) {
     const { password, email } = req.body;
     try {
-      const user = await userModel.findOne({ email });
+      const user = await userModel.findOne({ email , status:true});
       if (!user) {
-        const response = responseMessage(false, 404, `user ${email} not found`);
+        const response = responseMessage(false, 404, `User or Password incorrect`);
         return res.status(404).json(response);
       }
 

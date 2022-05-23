@@ -60,8 +60,9 @@ class ApplicationService {
     const { id } = req.payload;
     const { id: applicationId } = req.params;
     try {
-      const application = await applicationModel.findById(applicationId);
-      if (application.user === id) {
+      const application = await applicationModel.findOne({_id:applicationId}).populate("user");
+      console.log(application.user._id);
+      if (application.user._id == id) {
         await applicationModel.findByIdAndDelete(applicationId);
         const response = responseMessage(true, 201, "application deleted");
         return res.status(200).json(response);

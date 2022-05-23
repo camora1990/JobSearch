@@ -37,6 +37,7 @@ const validateRoleEmployeer = (req = request, res = response, next) => {
 };
 
 const validateRoleAdmin = (req = request, res = response, next) => {
+  
   if (req.payload.role !== "ADMIN") {
     const message = responseMessage(false,401,"unauthorized user")
     return res.status(401).json(message)
