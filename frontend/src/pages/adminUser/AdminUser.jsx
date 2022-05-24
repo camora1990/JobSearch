@@ -19,7 +19,7 @@ export const AdminUser = () => {
   });
 
   const getUsers = async () => {
-    setloading(true)
+    setloading(true);
     try {
       const { data: response } = await axios.get(`user/`, options);
       setUsers(response.data);
@@ -32,10 +32,10 @@ export const AdminUser = () => {
     setloading(false);
   };
 
-  const handleDeleteUser = async (id) => {
+  const handleChangeStatus = async (id,status) => {
     setloading(true);
     try {
-      const { data: response } = await axios.delete(`/user/${id}`, options);
+      const { data: response } = await axios.put(`/user/${id}`,{status:!status}, options);
       setloading(false);
       successMessage(response.message);
       getUsers();
@@ -63,6 +63,7 @@ export const AdminUser = () => {
               <th scope="col">NAME</th>
               <th scope="col">EMAIL</th>
               <th scope="col">ROLE</th>
+              <th scope="col">ESTATUS</th>
               <th scope="col">ACTIONS</th>
             </tr>
           </thead>
@@ -73,6 +74,7 @@ export const AdminUser = () => {
                 <td>{element.name}</td>
                 <td>{element.email}</td>
                 <td>{element.role}</td>
+                <td>{element.status ? "ACTIVE" : "INACTIVE"}</td>
                 <td>
                   <div className="actions d-flex w-100 justify-content-evenly">
                     <button
@@ -85,15 +87,20 @@ export const AdminUser = () => {
                     >
                       <i className="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button
-                      className="btn btn-outline-danger"
-                      disabled={element._id === user.id}
-                      onClick={() => {
-                        handleDeleteUser(element._id);
-                      }}
-                    >
-                      <i className="fa-solid fa-trash-can"></i>
-                    </button>
+                    {element._id !== user.id && (
+                      <button
+                        className={`btn btn-outline-${element.status ? "danger":"success"}`}
+                        onClick={() => {
+                          handleChangeStatus(element._id,element.status);
+                        }}
+                      >
+                        {element.status ? (
+                          <i className="fa-solid fa-trash-can"></i>
+                        ) : (
+                          <i className="fa-solid fa-circle-check"></i>
+                        )}
+                      </button>
+                    )}
                   </div>
                 </td>
               </tr>
