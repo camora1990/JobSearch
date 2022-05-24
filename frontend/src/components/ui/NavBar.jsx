@@ -46,7 +46,7 @@ export const NavBar = () => {
                     className={`nav-link ${(navData) =>
                       navData.isActive ? "active" : ""}`}
                   >
-                    My application
+                    {user.role === "EMPLOYER"?"Applicants":"My application"}
                   </NavLink>
                 </li>
               </>
