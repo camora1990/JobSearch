@@ -14,6 +14,7 @@ export const ApplicationScreen = () => {
   const [applications, setApplications] = useState([]);
 
   const getApplication = async () => {
+    debugger
     try {
       const { data: response } = await axios.get(`/application`, options);
       setApplications(response.data);
@@ -43,6 +44,7 @@ export const ApplicationScreen = () => {
     }
   };
   useEffect(() => {
+    debugger
     setloading(true);
     getApplication();
   }, []);

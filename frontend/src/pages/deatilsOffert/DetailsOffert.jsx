@@ -114,7 +114,7 @@ export const DetailsOffert = () => {
                 {" "}
                 <div className="card-offert__time">
                   <i className="fa-solid fa-clock text-muted me-1"></i>{" "}
-                  {moment(offer.createdAt, "YYYYMMDD").fromNow()}
+                  {moment(offer.createdAt).fromNow()}
                 </div>
                 <div className="card-offert__location">
                   <i className="fa-solid fa-location-dot text-muted me-1"></i>

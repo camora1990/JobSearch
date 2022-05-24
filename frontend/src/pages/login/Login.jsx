@@ -9,10 +9,10 @@ import { createErrorMessage } from "../../helpers/responseErrorMessage";
 
 export const Login = () => {
   const initialState = {
-    email: "CORREO3@CORREO.COM",
-    password: "A12345678*",
+    email: "",
+    password: "",
     name: "",
-    role: "USER",
+    role: "",
   };
   const { dispatch } = useContext(AuthContext);
   const [login, setlogin] = useState(true);
