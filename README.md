@@ -1,9 +1,9 @@
 <p align='right'>
-     <img height="100" src="./backend/doc/logo.png" </img> 
+     <img height="100" src="./frontend/public/assets/images/jobSearch24ejes.png" </img> 
      
 </p>
 
-# __JobSearch API - TzuzulCode__
+# __JobSearch APP - TzuzulCode__
 ## SPRINT 1 de 3
 <br>
 
@@ -24,7 +24,8 @@
 # __Diagrama de Contexto__ 
 <br>
 <p align="center">
-  <img  src="./backend/doc/diagramaContexto.jpg" />
+  <img  src="./frontend/public/assets/images/diagramaContexto.png" />
+  
 </p>
 
 ## Características de Arquitectura
@@ -140,6 +141,31 @@ Servidor en Node/Express con las siguientes rutas:
 __URL BASE__: http://localhost:PORT/api/v1
 <br>
 <br>
+# __FRONTEND__
+
+## Diagrama de __Funcionalidades - PROCESOS__ Nivel1
+<br>
+
+### __1.-__ Funcionalidades del __USER__ (applicant)
+<br>
+<p align="center">
+  <img  src="./frontend/public/assets/images/funUser.jpg" />
+</p>
+<br>
+
+### __2.-__ Funcionalidades del __EMPLOYER__
+<br>
+<p align="center">
+  <img  src="./frontend/public/assets/images/funEmp.jpg" />
+</p>
+<br>
+
+### __3.-__ Funcionalidades de __ADMIN__
+<br>
+<p align="center">
+  <img  src="./frontend/public/assets/images/funAdm.jpg" />
+</p>
+<br>
 
 # __Endpoints/Flags:__
 <br>
@@ -148,7 +174,9 @@ __URL BASE__: http://localhost:PORT/api/v1
   " src="./backend/doc/foldertzu.png/" />
 </p>
 
-# END POINTS USERS
+
+
+# __END POINTS USERS__
 
 - [ ] __POST /user__:
   - Se le debe enviar por el body el siguiente objeto:
